@@ -12,11 +12,9 @@
 
 引用css, js
 
-<code>
-	&lt;link rel="stylesheet" type="text/css" href="jPager/jPager.css"&gt;
-	&lt;script type="text/javascript" src="jPager/jquery-1.8.0.js"&gt;&lt;/script&gt;
-	&lt;script type="text/javascript" src="jPager/jquery.jPager.js"&gt;&lt;/script&gt;
-</code>
+<link rel="stylesheet" type="text/css" href="jPager/jPager.css">
+<script type="text/javascript" src="jPager/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="jPager/jquery.jPager.js"></script>
 
 <code>
 	$("#infoContainer").jPager();
