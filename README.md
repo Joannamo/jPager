@@ -13,10 +13,13 @@
 引用css, js
 
 <link rel="stylesheet" type="text/css" href="jPager/jPager.css"><br />
+
 <script type="text/javascript" src="jPager/jquery-1.8.0.js"></script><br />
+
 <script type="text/javascript" src="jPager/jquery.jPager.js"></script><br />
 
-<code>
+
+<code javascript>
 	$("#infoContainer").jPager();
 
 </code>
@@ -26,8 +29,9 @@
 
 
 
-<code>
+<code javascript>
 	$("#infoContainer").jPager({
+	
 		position: "after",            // after: 在内容的后面，before: 在内容的前面
 		
 		show_length: true,            // true: 显示共多少条信息, false: 不显示
