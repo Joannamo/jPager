@@ -1,4 +1,4 @@
-# calendar #
+# jPager #
 
 静态元素分页插件jPager
 
