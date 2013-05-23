@@ -13,11 +13,11 @@
 引用css, js
 
 <code html>
-<link rel="stylesheet" type="text/css" href="jPager/jPager.css">
+&lt;link rel="stylesheet" type="text/css" href="jPager/jPager.css"&gt;
 
-<script type="text/javascript" src="jPager/jquery-1.8.0.js"></script>
+&lt;script type="text/javascript" src="jPager/jquery-1.8.0.js"&gt;&lt;/script&gt;
 
-<script type="text/javascript" src="jPager/jquery.jPager.js"></script>
+&lt;script type="text/javascript" src="jPager/jquery.jPager.js"&gt;&lt;/script&gt;
 </code>
 
 <code javascript>
