@@ -5,13 +5,14 @@
 	<title>jPager</title>
 	<link rel="stylesheet" type="text/css" href="jPager/jPager.css">
 	<style type="text/css">
-	#info {margin:0; padding:0; margin-bottom:20px;  font-size: 12px;}
-	#info li {padding:0; margin-bottom: 3px; color:#88866F; list-style: square   inside;}
+	.info {margin:0; padding:0; margin-bottom:20px;  color:#88866F; font-size: 12px;}
+	.info li {padding:0; margin-bottom: 3px; list-style: square   inside;}
 	</style>
 </head>
 <body>
 <div id="infoContainer">
-	<ul id="info">
+	<ul class="info" style="color:red"><li>container 避免出现这种情况的元素</li></ul>
+	<ul id="info" class="info">
 		<li>这个很有特色1</li>
 		<li>这是很邦的插件2</li>
 		<li>好东西3</li>
@@ -86,6 +87,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#infoContainer").jPager({
+		container: "#info",
 		position: "after",            // after: 在内容的后面，before: 在内容的前面
 		show_length: true,            // true: 显示共多少条信息, false: 不显示
 		show_select: true,           // true: 显示下拉框选择条数, false: 不显示

@@ -13,4 +13,4 @@ date: 2013.5.22
 .jPager li.active a {background: #f5f5f5; color: #c6a999; cursor: default;}
 .jPager li.active a {color:#0088cc;}
 .jPager_Select {float:left; font-size: 12px; margin-right: 4px; color: #88866F;}
-.jPager_Select select {padding:4px; border:#dddddd solid 1px; border-radius: 3px; color: #88866F;}
+.jPager_Select select {padding:4px; width: 60px; border:#dddddd solid 1px; border-radius: 3px; color: #88866F;}

@@ -7,19 +7,20 @@ date: 2013.5.22
 		jPager: function(options){
 
 			var options = $.extend({
+				container: "",                // 操作container下面的children
 				position: "after",            // after: 在内容的后面，before: 在内容的前面
 				show_length: true,            // true: 显示共多少条信息, false: 不显示
-				show_select: true,           // true: 显示下拉框选择条数, false: 不显示
+				show_select: true,            // true: 显示下拉框选择条数, false: 不显示
 				per_num: 10,                  // 每页显示的条数
 				select: [10, 20, 50, 100],
-				active_num: 1,                // 默认显示的页数
-				children: "li"                // 要分页的元素
+				active_page: 1,                // 默认显示的页数
+				children: "li"                 // 要分页的元素
 			}, options);
 
 			
 			return this.each(function(){
 				var self = $(this),
-					elem = $(options.children, self), // 每条信息
+					elem = $(options.children, $(options.container)), // 每条信息
 					html = "",
 					page_html = '',
 					children_len = elem.length,  
@@ -50,7 +51,7 @@ date: 2013.5.22
 				}
 
 				$(".jPager_Select_element", self).change(function(){
-					j_select = $(".jPager_Select_element", self).val();
+					var j_select = $(".jPager_Select_element", self).val();
 					options.per_num = j_select;
 					page_num = Math.ceil(children_len/j_select);
 					renderPage();
@@ -97,8 +98,7 @@ date: 2013.5.22
 							first = $(".first", self),
 							last = $(".last", self),
 							prev = $(".prev", self),
-							next = $(".next", self),
-							j_select;					
+							next = $(".next", self);				
 						
 						// 有页码的点击事件
 						page_num_li.live("click", function(){
@@ -193,7 +193,7 @@ date: 2013.5.22
 							}
 						});
 
-						page_num_li.eq(options.active_num-1).click();
+						page_num_li.eq(options.active_page-1).click();
 					}else {
 						elem.show();
 						$(".jPager", self).remove();

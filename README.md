@@ -21,7 +21,7 @@
 </code>
 
 <code javascript>
-	$("#infoContainer").jPager();
+	$("#infoContainer").jPager({container : "#info"});
 
 </code>
 
@@ -32,6 +32,8 @@
 
 <code javascript>
 	$("#infoContainer").jPager({
+	
+		container : "#info",          // 这个必须指定，操作container下面的children
 	
 		position: "after",            // after: 在内容的后面，before: 在内容的前面
 		
