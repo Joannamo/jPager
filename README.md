@@ -84,3 +84,7 @@
 		children: "li"                
 	});
 </code>
+
+# demo #
+
+<p><a href="http://joannamo.github.com/jPager/index.html">jPager</a></p>	
