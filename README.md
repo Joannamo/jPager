@@ -87,7 +87,7 @@
 
 # demo #
 
-<p><a href="http://joannamo.github.com/jPager/index.html">普通用法：</a></p>
+<p><a href="http://joannamo.github.com/jPager/index.html">jPager</a></p>
 
 
 
