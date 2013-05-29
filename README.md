@@ -7,6 +7,31 @@
 
 ![jPager效果图](images/jPager.jpg)
 
+# 参数 #
+
+* @config {string} 			    container 操作container下面的children
+
+* @config {string} 			    position 分页显示的位置； after: 在内容的后面，before: 在内容的前面
+
+* @config {Boolean} 			showLength 首否显示总共多少条；true: 显示共多少条信息, false: 不显示
+
+* @config {Boolean} 			showSelect 是否显示选择下拉框；true: 显示下拉框选择条数, false: 不显示
+
+* @config {int} 			    perPage 每页显示多少条信息, 这里的信息是从select里面取
+
+* @config {array}               select 下拉框的信息，这个是showSelect为true时设置才有效 [10, 20, 50, 100]
+
+* @config {int} 			    activePage 默认显示哪一页
+
+ * @config {object}             textmap: {
+									first: "首页",
+									last: "末页",
+									prev: "上一页",
+									next: "下一页"
+								}
+								
+ * @config {string}             children 孩子元素
+
 
 # 使用方法 #
 
@@ -33,20 +58,29 @@
 <code javascript>
 	$("#infoContainer").jPager({
 	
-		container : "#info",          // 这个必须指定，操作container下面的children
-	
-		position: "after",            // after: 在内容的后面，before: 在内容的前面
+		container: "#info",
 		
-		show_length: true,            // true: 显示共多少条信息, false: 不显示
+		position: "after",  
 		
-		show_select: true,            // true: 显示下拉框选择条数, false: 不显示
+		showLength: true,  
 		
-		per_num: 10,                  // 每页显示的条数， 如果show_select为false, 则根据per_num来显示条数
+		showSelect: true,
 		
-		select: [10, 20, 50, 100],    // 下拉框的条数
+		showAction:true,  
+        
+		perPage: 10,  
 		
-		active_num: 1,                // 默认显示的页数
+		select: [10, 20, 50, 100],
 		
-		children: "li"                // 要分页的元素
+		activePage: 1, 
+		
+		textmap: {
+			first: "首页",
+			last: "末页",
+			prev: "上一页",
+			next: "下一页"
+		},   
+		
+		children: "li"                
 	});
 </code>

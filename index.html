@@ -88,13 +88,20 @@
 $(function(){
 	$("#infoContainer").jPager({
 		container: "#info",
-		position: "after",            // after: 在内容的后面，before: 在内容的前面
-		show_length: true,            // true: 显示共多少条信息, false: 不显示
-		show_select: true,           // true: 显示下拉框选择条数, false: 不显示
-		per_num: 10,                  // 每页显示的条数
+		position: "after",            
+		showLength: true,            
+		showSelect: true,
+		showAction:true,          
+		perPage: 10,                  
 		select: [10, 20, 50, 100],
-		active_num: 1,                // 默认显示的页数
-		children: "li"                // 要分页的元素
+		activePage: 1, 
+		textmap: {
+			first: "首页",
+			last: "末页",
+			prev: "上一页",
+			next: "下一页"
+		},               
+		children: "li"                
 	});
 });
 </script>

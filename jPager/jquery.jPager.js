@@ -1,20 +1,43 @@
 /*
 author: Joanna
 date: 2013.5.22
+
+* @config {string} 			    container 操作container下面的children
+* @config {string} 			    position 分页显示的位置； after: 在内容的后面，before: 在内容的前面
+* @config {Boolean} 			showLength 首否显示总共多少条；true: 显示共多少条信息, false: 不显示
+* @config {Boolean} 			showSelect 是否显示选择下拉框；true: 显示下拉框选择条数, false: 不显示
+* @config {int} 			    perPage 每页显示多少条信息, 这里的信息是从select里面取
+* @config {array}               select 下拉框的信息，这个是showSelect为true时设置才有效 [10, 20, 50, 100]
+* @config {int} 			    activePage 默认显示哪一页
+ * @config {object}             textmap: {
+									first: "首页",
+									last: "末页",
+									prev: "上一页",
+									next: "下一页"
+								}
+ * @config {string}             children 孩子元素
+
 */
 ;(function($){
 	$.extend($.fn, {
 		jPager: function(options){
 
 			var options = $.extend({
-				container: "",                // 操作container下面的children
-				position: "after",            // after: 在内容的后面，before: 在内容的前面
-				show_length: true,            // true: 显示共多少条信息, false: 不显示
-				show_select: true,            // true: 显示下拉框选择条数, false: 不显示
-				per_num: 10,                  // 每页显示的条数
+				container: "",                
+				position: "after",            
+				showLength: true,            
+				showSelect: true, 
+				showAction:true,           
+				perPage: 10,                  
 				select: [10, 20, 50, 100],
-				active_page: 1,                // 默认显示的页数
-				children: "li"                 // 要分页的元素
+				activePage: 1,
+				textmap: {
+					first: "首页",
+					last: "末页",
+					prev: "上一页",
+					next: "下一页"
+				},                
+				children: "li"                 
 			}, options);
 
 			
@@ -24,19 +47,23 @@ date: 2013.5.22
 					html = "",
 					page_html = '',
 					children_len = elem.length,  
-					page_num = Math.ceil(children_len/options.per_num),
+					page_num = Math.ceil(children_len/options.perPage),
 					m = 0;
 
 				self.children(".jPager_container", self).remove();
 
 				// 是否显示选择页码
-				if(options.show_select){
+				if(options.showSelect){
 					html +='<div class="jPager_container"> \
 								<div class="jPager_Select"> \
 								<span>每页显示</span> \
 								<select class="jPager_Select_element">';
 					for (; m<options.select.length; m++){
-						html += '<option value="'+options.select[m]+'">'+options.select[m]+'</option>';
+						if(options.select[m]==options.perPage){
+							html += '<option selected value="'+options.select[m]+'">'+options.select[m]+'</option>';
+						}else {
+							html += '<option value="'+options.select[m]+'">'+options.select[m]+'</option>';
+						}						
 					}
 					html += '</select></div></div>';
 				}else {
@@ -52,7 +79,7 @@ date: 2013.5.22
 
 				$(".jPager_Select_element", self).change(function(){
 					var j_select = $(".jPager_Select_element", self).val();
-					options.per_num = j_select;
+					options.perPage = j_select;
 					page_num = Math.ceil(children_len/j_select);
 					renderPage();
 				}).change();
@@ -62,26 +89,35 @@ date: 2013.5.22
 				// 页码
 				function renderPage(){
 					var i = 1;					
-					if(page_num>1){																				
-						page_html = '<ul class="jPager"><li cur_page="1" class="first"><a href="javascript:;">首页</a></li> \
-								<li class="prev"><a href="javascript:;">上一页</a></li>';
+					if(page_num>1){	
+
+						if(options.showAction)	{
+							page_html = '<ul class="jPager"><li cur_page="1" class="first"><a href="javascript:;">'+options.textmap.first+'</a></li> \
+								<li class="prev"><a href="javascript:;">'+options.textmap.prev+'</a></li>';
+						}else {
+							page_html = '<ul class="jPager">';
+						}																		
+						
 
 						for (; i<=page_num; i++){
 							page_html += '<li class="page_num" cur_page="'+i+'"><a href="javascript:;">'+i+'</a></li>';						
 						}
 
-						page_html += '<li class="next"><a href="javascript:;">下一页</a></li> \
-								<li cur_page="'+page_num+'" class="last"><a href="javascript:;">尾页</a></li>';
+						if(options.showAction){
+							page_html += '<li class="next"><a href="javascript:;">'+options.textmap.next+'</a></li> \
+								<li cur_page="'+page_num+'" class="last"><a href="javascript:;">'+options.textmap.last+'</a></li>';
+						}
+						
 
 						// 是否显示共多少条
-						if(options.show_length){
-							page_html += '<li><span>共'+children_len+'条</span></li></ul></div>';
+						if(options.showLength){
+							page_html += '<li><span>共'+children_len+'条</span></li></ul>';
 						}else {
-							page_html += '</ul></div>';
+							page_html += '</ul>';
 						}					
 
 						$(".jPager", self).remove();
-						if(options.show_select) {
+						if(options.showSelect) {
 							
 							$(".jPager_container", self).append(page_html);
 						}else {
@@ -121,7 +157,7 @@ date: 2013.5.22
 								prev.attr("cur_page", "");
 								next.attr("cur_page", 2);
 
-								elem.eq(options.per_num).prevAll(options.children).show();
+								elem.eq(options.perPage).prevAll(options.children).show();
 							}else if(cur_page==page_num){ // 尾页
 								// $(".jPager li[cur_page='"+page_num+"']").addClass("active");
 								first.removeClass("disabled");
@@ -134,7 +170,7 @@ date: 2013.5.22
 								prev.attr("cur_page", page_num-1);
 								next.attr("cur_page", "");
 
-								elem.eq(options.per_num*(page_num-1)).nextAll(options.children).show();
+								elem.eq(options.perPage*(page_num-1)).nextAll(options.children).show();
 							}else { // 中间页
 								first.removeClass("disabled");
 								last.removeClass("disabled");
@@ -147,7 +183,7 @@ date: 2013.5.22
 								next.attr("cur_page", parseInt(cur_page)+1);
 
 								var new_elem = elem.filter(function(index){
-									return index>=(cur_page-1)*options.per_num &&index<cur_page*options.per_num;
+									return index>=(cur_page-1)*options.perPage &&index<cur_page*options.perPage;
 								});
 
 								new_elem.show();
@@ -193,7 +229,7 @@ date: 2013.5.22
 							}
 						});
 
-						page_num_li.eq(options.active_page-1).click();
+						page_num_li.eq(options.activePage-1).click();
 					}else {
 						elem.show();
 						$(".jPager", self).remove();
